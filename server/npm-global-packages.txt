@@ -1,0 +1,4 @@
+C:\Users\Aadarsh Jain\AppData\Roaming\npm
+├── node-gyp@11.1.0
+└── nodemon@3.1.9
+
