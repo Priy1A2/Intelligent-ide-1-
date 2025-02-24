@@ -1,0 +1,50 @@
+/* Ensure the entire page is dark */
+html, body {
+    background-color: #121212 !important;  /* Force dark mode */
+    color: white !important;               /* Ensure text is white */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Darken all sections */
+h2, h3, form, #output, pre {
+    background-color: #121212 !important;  /* Dark background */
+    color: white !important;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Darken CodeMirror editor */
+.CodeMirror {
+    height: 300px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #1e1e1e !important; /* Force dark */
+    color: #ffffff !important;            /* Ensure text is white */
+}
+
+/* Darken text areas */
+textarea {
+    background-color: #1e1e1e !important;
+    color: white !important;
+    border: 1px solid #444;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Buttons */
+button {
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #218838;
+}
