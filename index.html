@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent IDE</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Welcome to Intelligent IDE!</h2>
+    <form id="codeForm">
+        <textarea name="prompt" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">Generate Code</button>
+    </form>
+
+    <h3>Response:</h3>
+    <div id="output"><pre><code>{{ response }}</code></pre></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#codeForm").submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+    
+                var prompt = $("textarea[name='prompt']").val();
+                var generateButton = $("button[type='submit']");
+    
+                generateButton.prop("disabled", true).text("Generating..."); // Disable button
+    
+                $.post("/generate_code", { code_prompt: prompt }, function(data) {
+                    if (data.response) {
+                        $("#output").html("<pre><code>" + data.response + "</code></pre>");
+                    } else {
+                        $("#output").html("<p>Error: No response received.</p>");
+                    }
+                }).fail(function() {
+                    $("#output").html("<p>Error: Could not connect to the server.</p>");
+                }).always(function() {
+                    generateButton.prop("disabled", false).text("Generate Code"); // Re-enable button
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>
