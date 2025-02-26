@@ -21,6 +21,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/edit/matchbrackets.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/edit/closebrackets.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/addon/selection/active-line.min.js"></script>
+    <script>
+        async function runCode() {
+            // const code = document.getElementById('codeEditor').value;
+            const code = editor.getValue(); // Correct way to get CodeMirror content
+        console.log('Code being sent:', code);
+
+            try {
+                const response = await fetch('/api/run-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code })
+                });
+
+                const result = await response.json();
+                document.getElementById('output').innerText = result.output;
+            } catch (error) {
+                console.error('Error running code:', error);
+                document.getElementById('output').innerText = 'Failed to run code';
+            }
+        }
+    </script>
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -104,6 +127,7 @@
                     <input type="file" id="fileInput" accept=".py" style="display: none;">
                     <button type="button" id="uploadBtn"><i class="fas fa-upload"></i> Upload File</button>
                     <button type="submit"><i class="fas fa-play"></i> Generate Code</button>
+                    <button type="button" id="runCodeBtn" onclick="runCode()"><i class="fas fa-play-circle"></i> Run Code</button>
                     <button type="button" id="helpBtn"><i class="fas fa-question-circle"></i> Need Help?</button>
                 </div>
             </form>
@@ -114,7 +138,7 @@
                     <span>Console Output</span>
                 </div>
                 <div id="output">
-                    <pre><code>Ready to generate code...</code></pre>
+                    <pre id="output"><code>Ready to generate code...</code></pre>
                 </div>
             </div>
         </main>
@@ -134,9 +158,11 @@
     </div>
 
     <script>
+        let editor;
         $(document).ready(function () {
+            let autocompleteTimeout;
             // Initialize CodeMirror for better coding experience
-            var editor = CodeMirror.fromTextArea(document.getElementById("codeEditor"), {
+            editor = CodeMirror.fromTextArea(document.getElementById("codeEditor"), {
                 mode: "python",
                 theme: "material-darker",  // Dark theme for code editor
                 lineNumbers: true,
@@ -248,83 +274,8 @@
             function fixBugs() {
                 var code = editor.getValue(); // Get code from CodeMirror editor
 
-                // Add loading effect & disable button
-                // $("#fixBugsBtn").html('<i class="fas fa-spinner fa-spin"></i> Fixing...').prop("disabled", true);
-
-                // $.post("/fix_bug", { code: code }, function (data) {
-                //     if (data.response === "No errors") {
-                //         $("#output").html("No errors found in your code."); // Display plain text
-                //     } else if (data.response) {
-                //         editor.setValue(data.response); // Update editor with fixed code
-                //         $("#output").html("<pre><code>Bugs Fixed Successfully!</code></pre>");
-                //     } else if (data.error) {
-                //         $("#output").html("<pre><code>Error: " + data.error + "</code></pre>");
-                //     } else {
-                //         $("#output").html("<pre><code>An unknown error occurred.</code></pre>");
-                //     }
-                // }
-                // ).fail(function (jqXHR, textStatus, errorThrown) {
-                //     console.error("AJAX Error:", textStatus, errorThrown);
-                //     $("#output").html("<pre><code>Error: Server Connection Failed.</code></pre>");
-                // }).always(function () {
-                //     // Re-enable button & restore text
-                //     $("#fixBugsBtn").html('<i class="fas fa-bug"></i> Fix Bugs').prop("disabled", false);
-                // });
-
-                // $.ajax({
-                //     url: "/fix_bug",          // Server URL
-                //     type: "POST",             // HTTP method
-                //     contentType: "application/json",
-                //     data: JSON.stringify({ code: editor.getValue() }), // Send JSON data
-                //     success: function (data) {
-                //         if (data.response === "No errors") {
-                //             $("#output").html("No errors found in your code."); // Display plain text
-                //         } else if (data.response) {
-                //             editor.setValue(data.response); // Update editor with fixed code
-                //             $("#output").html("<pre><code>Bugs Fixed Successfully!</code></pre>");
-                //         } else if (data.error) {
-                //             $("#output").html("<pre><code>Error: " + data.error + "</code></pre>");
-                //         } else {
-                //             $("#output").html("<pre><code>An unknown error occurred.</code></pre>");
-                //         }
-                //     },
-                //     error: function (xhr, status, error) {
-                //         console.error("AJAX Error:", status, error);
-                //         $("#output").html("<pre><code>Error: Server Connection Failed.</code></pre>");
-                //     },
-                //     complete: function () {
-                //         // Re-enable button & restore text
-                //         $("#fixBugsBtn").html('<i class="fas fa-bug"></i> Fix Bugs').prop("disabled", false);
-                //     }
-                // });
-
-
                 // Disable button and show loading text
                 $("#fixBugsBtn").html('<i class="fas fa-spinner fa-spin"></i> Fixing...').prop("disabled", true);
-
-
-                // 2
-                // $.ajax({
-                //     url: "/fix_bug",
-                //     type: "POST",
-                //     contentType: "application/json",
-                //     data: JSON.stringify({ code: editor.getValue() }),
-                //     success: function (data) {
-                //         if (data.response === "No errors") {
-                //             $("#output").html("<pre><code>No errors found in your code.</code></pre>");
-                //         } else {
-                //             $("#output").html("<pre><code>Bugs Fixed Successfully!</code></pre>");
-                //         }
-                //     },
-                //     error: function (xhr, status, error) {
-                //         $("#output").html("<pre><code>Error: Server Connection Failed.</code></pre>");
-                //         console.error("AJAX Error:", status, error);
-                //     },
-                //     complete: function () {
-                //         // Re-enable button & restore text
-                //         $("#fixBugsBtn").html('<i class="fas fa-bug"></i> Fix Bugs').prop("disabled", false);
-                //     }
-                // });
 
 
                 $.ajax({
