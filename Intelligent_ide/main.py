@@ -331,5 +331,32 @@ def cicd_pipeline():
     return jsonify({"response": response})
 
 
+@app.route('/api/run-code', methods=['POST'])
+def run_code():
+    try:
+        data = request.json
+        code = data.get('code', '')
+
+        if not code.strip():
+            return jsonify({'output': 'No code provided'}), 400
+
+        print("Code received:", code)  # Debug print
+
+        result = subprocess.run(
+            ['python3', '-c', code],
+            text=True,
+            capture_output=True,
+            timeout=5
+        )
+
+        print("Result:", result.stdout, result.stderr)  # Debug print
+        return jsonify({'output': result.stdout or result.stderr})
+
+    except Exception as e:
+        print("Error running code:", traceback.format_exc())  # Full error traceback
+        return jsonify({'output': 'Internal server error'}), 500
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
