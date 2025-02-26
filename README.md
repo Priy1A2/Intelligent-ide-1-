@@ -47,22 +47,35 @@ Debugging insights are provided alongside suggested code corrections.
 The system automatically generates test cases for the code to validate its functionality.
 4. CI/CD Automation:
 Continuous build and integration processes can be automated with minimal configuration.
+
+
 Algorithm Approach:
 AI-Powered Prompt Engineering: Optimized structured prompts for accurate code generation and debugging.
 User Query Processing: Extracts key details from user input to improve AI responses.
 Pattern-Based Debugging: Identifies common syntax and logical errors for quick fixes.
 File Handling & Execution: Allows users to upload external files for execution.
 Interactive AI Assistance: Provides real-time explanations for code fixes and improvements.
+
+
 Future Scope:
 AI Accuracy Improvement: Refine the AI model for better code generation and debugging assistance.
 Expansion of Language Support: Add support for multiple programming languages.
 Enhanced Debugging Capabilities: Improve error detection and debugging suggestions.
+
+
 Security & Privacy:
 Secure API Key Handling: The API key is securely stored and not exposed publicly.
 Rate Limiting: Plan to implement rate limiting to prevent excessive API usage and ensure fair usage.
+
+
 Feasibility:
 Technical Feasibility: The project leverages existing AI models via APIs, eliminating the need for complex training.
-Data Accessibility: Processes user queries dynamically without requiring large datasets.
-Scalability: The architecture is designed to handle growth, with the possibility of cloud deployment and further optimization.
+
+Data Accessibility: 
+Processes user queries dynamically without requiring large datasets.
+
+Scalability: 
+The architecture is designed to handle growth, with the possibility of cloud deployment and further optimization.
+
 Conclusion:
 This Intelligent IDE aims to reduce time spent on repetitive coding tasks, allowing developers to focus on creating innovative solutions. By integrating AI, it provides a smarter and faster way to write, debug, and test code, ultimately enhancing productivity.
