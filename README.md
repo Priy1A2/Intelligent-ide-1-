@@ -31,7 +31,7 @@ Clone the repository to your local machine:
 1) pip install google-generativeai
 2) pip install Flask
 3) pip install jedi
-4)python main.py
+4) python main.py
 
 Visit http://127.0.0.1:5000 (or your configured URL) to start interacting with the Intelligent IDE.
 
