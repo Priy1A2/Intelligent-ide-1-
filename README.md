@@ -28,9 +28,8 @@ Database: SQLite/PostgreSQL (based on your choice)
 Install Dependencies:
 Clone the repository to your local machine:
 
-1) pip install Flask
-
-2) pip install google-generativeai
+1) pip install google-generativeai
+2) pip install Flask
 3) pip install jedi
 4)python main.py
 
