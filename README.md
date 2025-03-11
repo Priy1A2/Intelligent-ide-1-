@@ -1,9 +1,5 @@
 # 🚀 Intelligent IDE - AI-Powered Development Environment
 
-![GitHub Stars](https://img.shields.io/github/stars/Intelligent-ide-1-?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/Intelligent-ide-1-?style=social)
-![GitHub License](https://img.shields.io/github/license/Intelligent-ide-1-)
-
 > **AI-powered IDE that automates code generation, real-time debugging, and test case creation to boost developer productivity.**
 
 ## 📌 Overview
