@@ -113,4 +113,4 @@ Then visit **[http://127.0.0.1:5000](http://127.0.0.1:5000)** to start using **I
 ## 🌟 Show Your Support!
 If you found this project useful, consider **starring ⭐ the repository** and **contributing**! 🙌
 
-📌 **GitHub Repository:** [https://github.com/Priy1A2/Intelligent-ide-1-.git](https://github.com/Priy1A2/Intelligent-IDE)  
+📌 **GitHub Repository:** [git-repo-link](https://github.com/Priy1A2/Intelligent-ide-1-.git))  
